@@ -3,41 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Puter.js Frontend</title>
+    <title>Puter.js + Telegram Bot</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="https://js.puter.com/v2/"></script>
 </head>
 <body>
-    <script>
-        // Función para manejar solicitudes
-        async function handleRequest(request) {
-            const { type, data } = request;
+    <div class="container">
+        <header>
+            <h1>🤖 Bot de Telegram con Puter.js</h1>
+            <p>Interactúa con IA directamente desde Telegram.</p>
+        </header>
 
-            try {
-                let response;
-                switch (type) {
-                    case "chat":
-                        response = await puter.ai.chat(data);
-                        break;
-                    case "txt2img":
-                        response = await puter.ai.txt2img(data, true);
-                        break;
-                    default:
-                        response = "Tipo de solicitud no válido.";
-                }
-                return { success: true, response };
-            } catch (error) {
-                return { success: false, error: error.message };
-            }
-        }
+        <main>
+            <div class="chat-box" id="chat-box">
+                <!-- Mensajes del chat aparecerán aquí -->
+            </div>
 
-        // Escuchar mensajes desde el backend
-        window.addEventListener("message", async (event) => {
-            if (event.origin !== "https://yordandevzd.github.io") return; // Solo aceptar mensajes de tu dominio
-            const { requestId, request } = event.data;
+            <div class="input-box">
+                <input type="text" id="user-input" placeholder="Escribe tu mensaje...">
+                <button id="send-btn">Enviar</button>
+            </div>
+        </main>
 
-            const result = await handleRequest(request);
-            window.parent.postMessage({ requestId, result }, event.origin);
-        });
-    </script>
+        <footer>
+            <p>Desarrollado por <a href="https://yordandevzd.github.io" target="_blank">YordanDev</a></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
