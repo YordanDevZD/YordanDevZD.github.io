@@ -3,30 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Puter.js + Telegram Bot</title>
+    <title>Bot IA + Imágenes</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/fira-code@4.0.0/css.min.css" rel="stylesheet">
     <script src="https://js.puter.com/v2/"></script>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🤖 Bot de Telegram con Puter.js</h1>
-            <p>Interactúa con IA directamente desde Telegram.</p>
+            <h1>🤖 Chat IA Avanzado</h1>
+            <p>Escribe y genera imágenes con IA</p>
         </header>
 
         <main>
-            <div class="chat-box" id="chat-box">
-                <!-- Mensajes del chat aparecerán aquí -->
-            </div>
-
+            <div class="chat-box" id="chat-box"></div>
+            
             <div class="input-box">
-                <input type="text" id="user-input" placeholder="Escribe tu mensaje...">
-                <button id="send-btn">Enviar</button>
+                <input type="text" id="user-input" placeholder="Escribe tu mensaje o prompt para imagen...">
+                <div class="button-group">
+                    <button id="send-btn">Enviar</button>
+                    <button id="image-btn">🖼️ Generar</button>
+                </div>
             </div>
         </main>
 
         <footer>
-            <p>Desarrollado por <a href="https://yordandevzd.github.io" target="_blank">YordanDev</a></p>
+            <p>Powered by <a href="https://yordandevzd.github.io" target="_blank">YordanDev</a></p>
         </footer>
     </div>
 
