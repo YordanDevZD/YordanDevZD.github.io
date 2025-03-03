@@ -32,7 +32,7 @@
 
         // Escuchar mensajes desde el backend
         window.addEventListener("message", async (event) => {
-            if (event.origin !== "https://tudominio.com") return; // Reemplaza con tu dominio
+            if (event.origin !== "https://yordandevzd.github.io") return; // Solo aceptar mensajes de tu dominio
             const { requestId, request } = event.data;
 
             const result = await handleRequest(request);
