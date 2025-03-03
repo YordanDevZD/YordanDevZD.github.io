@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puter.js Frontend</title>
+    <script src="https://js.puter.com/v2/"></script>
+</head>
+<body>
+    <script>
+        // Función para manejar solicitudes
+        async function handleRequest(request) {
+            const { type, data } = request;
+
+            try {
+                let response;
+                switch (type) {
+                    case "chat":
+                        response = await puter.ai.chat(data);
+                        break;
+                    case "txt2img":
+                        response = await puter.ai.txt2img(data, true);
+                        break;
+                    default:
+                        response = "Tipo de solicitud no válido.";
+                }
+                return { success: true, response };
+            } catch (error) {
+                return { success: false, error: error.message };
+            }
+        }
+
+        // Escuchar mensajes desde el backend
+        window.addEventListener("message", async (event) => {
+            if (event.origin !== "https://tudominio.com") return; // Reemplaza con tu dominio
+            const { requestId, request } = event.data;
+
+            const result = await handleRequest(request);
+            window.parent.postMessage({ requestId, result }, event.origin);
+        });
+    </script>
+</body>
+</html>
