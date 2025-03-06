@@ -1,83 +1,43 @@
-const chatBox = document.getElementById("chat-box");
-const userInput = document.getElementById("user-input");
-const sendBtn = document.getElementById("send-btn");
-const imageBtn = document.getElementById("image-btn");
+const API_KEY = 'TU_CLAVE_DE_API'; // Reemplaza con tu clave de API de TMDb
+const CATALOGO_ITEMS = [
+    { nombre: "Kara Sevda", tipo: "tv", id: 66044 }, // Novela turca
+    { nombre: "Avenida Brasil", tipo: "tv", id: 45858 }, // Novela brasileña
+    { nombre: "Muhteşem Yüzyıl", tipo: "tv", id: 44857 }, // Novela turca
+    { nombre: "La Reina del Sur", tipo: "tv", id: 34524 }, // Novela mexicana
+    { nombre: "Breaking Bad", tipo: "tv", id: 1396 }, // Serie
+    { nombre: "Inception", tipo: "movie", id: 27205 } // Película
+];
 
-function addMessage(content, isUser = false, isImage = false) {
-    const message = document.createElement("div");
-    message.className = `message ${isUser ? 'user' : 'bot'}`;
-    
-    if(isImage) {
-        const img = document.createElement("img");
-        img.src = content;
-        img.className = "generated-image";
-        img.loading = "lazy";
-        message.appendChild(img);
-    } else {
-        message.innerHTML = formatMessage(content);
-        addCopyButtons(message);
-    }
-    
-    chatBox.appendChild(message);
-    chatBox.scrollTop = chatBox.scrollHeight;
-}
+const catalogoDiv = document.getElementById('catalogo');
 
-function formatMessage(text) {
-    return text.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
-        return `<pre data-lang="${lang || 'code'}"><code>${code.trim()}</code></pre>`;
-    });
-}
+async function fetchCatalogo() {
+    for (const item of CATALOGO_ITEMS) {
+        const response = await fetch(`https://api.themoviedb.org/3/${item.tipo}/${item.id}?api_key=${API_KEY}&language=es`);
+        const data = await response.json();
 
-function addCopyButtons(element) {
-    element.querySelectorAll('pre').forEach(pre => {
-        const copyBtn = document.createElement("button");
-        copyBtn.className = "copy-btn";
-        copyBtn.innerHTML = "📋";
-        copyBtn.onclick = () => {
-            navigator.clipboard.writeText(pre.querySelector('code').textContent);
-            copyBtn.innerHTML = "✅";
-            setTimeout(() => copyBtn.innerHTML = "📋", 2000);
-        };
-        pre.appendChild(copyBtn);
-    });
-}
-
-async function handleText(prompt) {
-    try {
-        const response = await puter.ai.chat(prompt);
-        addMessage(response);
-    } catch (error) {
-        addMessage("⚠️ Error procesando tu solicitud");
+        if (data.name || data.title) {
+            mostrarItem(data);
+        } else {
+            console.error(`No se encontró: ${item.nombre}`);
+        }
     }
 }
 
-async function generateImage(prompt) {
-    try {
-        const imageUrl = await puter.ai.txt2img(prompt, true);
-        addMessage(imageUrl, false, true);
-    } catch (error) {
-        addMessage("⚠️ Error generando la imagen");
-    }
+function mostrarItem(item) {
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'item';
+
+    const posterUrl = item.poster_path 
+        ? `https://image.tmdb.org/t/p/w500${item.poster_path}` 
+        : 'https://via.placeholder.com/500x750?text=Imagen+no+disponible';
+
+    itemDiv.innerHTML = `
+        <img src="${posterUrl}" alt="${item.name || item.title}">
+        <h2>${item.name || item.title}</h2>
+        <p>${item.overview || "Descripción no disponible"}</p>
+    `;
+
+    catalogoDiv.appendChild(itemDiv);
 }
 
-sendBtn.addEventListener("click", () => {
-    const prompt = userInput.value.trim();
-    if(prompt) {
-        addMessage(prompt, true);
-        handleText(prompt);
-        userInput.value = "";
-    }
-});
-
-imageBtn.addEventListener("click", () => {
-    const prompt = userInput.value.trim();
-    if(prompt) {
-        addMessage(`Generando imagen: "${prompt}"`, true);
-        generateImage(prompt);
-        userInput.value = "";
-    }
-});
-
-userInput.addEventListener("keypress", (e) => {
-    if(e.key === "Enter") sendBtn.click();
-});
+fetchCatalogo();
