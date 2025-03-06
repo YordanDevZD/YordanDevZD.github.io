@@ -5,5 +5,5 @@ export const CATALOGO_ITEMS = [
     { nombre: "Breaking Bad", tipo: "tv", categoria: "series" },
     { nombre: "Belleza Fatal", tipo: "tv", categoria: "novelas" },
     { nombre: "Los Hombres De Paco", tipo: "tv", categoria: "series" },
-    { nombre: "Interestelar", tipo: "movie", categoria: "pelicula" }
+    { nombre: "Interestelar", tipo: "movie", categoria: "peliculas" }
 ];
