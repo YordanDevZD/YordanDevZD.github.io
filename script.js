@@ -1,6 +1,6 @@
 import { CATALOGO_ITEMS } from './catalogo.js';
 
-const API_KEY = '45ca66a85cc9f8f4d18c458bb6536092'; // Reemplazar con tu API key
+const API_KEY = '45ca66a85cc9f8f4d18c458bb6536092'; // Reemplazar con tu API ke
 
 async function buscarContenido(nombre, tipo) {
     try {
