@@ -1,43 +1,57 @@
-const API_KEY = '45ca66a85cc9f8f4d18c458bb6536092'; // Reemplaza con tu clave de API de
-const CATALOGO_ITEMS = [
-    { nombre: "Kara Sevda", tipo: "tv", id: 66044 }, // Novela turca
-    { nombre: "Avenida Brasil", tipo: "tv", id: 45858 }, // Novela brasileña
-    { nombre: "Muhteşem Yüzyıl", tipo: "tv", id: 44857 }, // Novela turca
-    { nombre: "La Reina del Sur", tipo: "tv", id: 34524 }, // Novela mexicana
-    { nombre: "Breaking Bad", tipo: "tv", id: 1396 }, // Serie
-    { nombre: "Inception", tipo: "movie", id: 27205 } // Película
-];
+import { CATALOGO_ITEMS } from './catalogo.js';
 
-const catalogoDiv = document.getElementById('catalogo');
+const API_KEY = '45ca66a85cc9f8f4d18c458bb6536092'; // Reemplazar con tu API key
 
-async function fetchCatalogo() {
-    for (const item of CATALOGO_ITEMS) {
-        const response = await fetch(`https://api.themoviedb.org/3/${item.tipo}/${item.id}?api_key=${API_KEY}&language=es`);
+async function buscarContenido(nombre, tipo) {
+    try {
+        const response = await fetch(
+            `https://api.themoviedb.org/3/search/${tipo}?api_key=${API_KEY}&language=es&query=${encodeURIComponent(nombre)}`
+        );
         const data = await response.json();
+        return data.results[0];
+    } catch (error) {
+        console.error('Error buscando contenido:', error);
+        return null;
+    }
+}
 
-        if (data.name || data.title) {
-            mostrarItem(data);
-        } else {
-            console.error(`No se encontró: ${item.nombre}`);
+function acortarDescripcion(texto) {
+    const maxCaracteres = 120;
+    return texto.length > maxCaracteres 
+        ? texto.substring(0, maxCaracteres) + '...' 
+        : texto;
+}
+
+async function cargarCatalogo() {
+    for (const item of CATALOGO_ITEMS) {
+        const resultado = await buscarContenido(item.nombre, item.tipo);
+        
+        if (resultado) {
+            mostrarItem({
+                ...resultado,
+                overview: acortarDescripcion(resultado.overview || 'Descripción no disponible')
+            }, item.categoria);
         }
     }
 }
 
-function mostrarItem(item) {
-    const itemDiv = document.createElement('div');
-    itemDiv.className = 'item';
-
+function mostrarItem(item, categoria) {
+    const seccion = document.querySelector(`[data-categoria="${categoria}"]`);
+    
+    const elemento = document.createElement('div');
+    elemento.className = 'item';
+    
     const posterUrl = item.poster_path 
-        ? `https://image.tmdb.org/t/p/w500${item.poster_path}` 
+        ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
         : 'https://via.placeholder.com/500x750?text=Imagen+no+disponible';
 
-    itemDiv.innerHTML = `
-        <img src="${posterUrl}" alt="${item.name || item.title}">
-        <h2>${item.name || item.title}</h2>
-        <p>${item.overview || "Descripción no disponible"}</p>
+    elemento.innerHTML = `
+        <img src="${posterUrl}" alt="${item.title || item.name}">
+        <h2>${item.title || item.name}</h2>
+        <p>${item.overview}</p>
     `;
 
-    catalogoDiv.appendChild(itemDiv);
+    seccion.appendChild(elemento);
 }
 
-fetchCatalogo();
+cargarCatalogo();
