@@ -6,5 +6,17 @@ export const CATALOGO_ITEMS = [
     { nombre: "Belleza Fatal", tipo: "tv", categoria: "novelas" },
     { nombre: "Los Hombres De Paco", tipo: "tv", categoria: "series" },
     { nombre: "Interestelar", tipo: "movie", categoria: "peliculas" },
-    { nombre: "Culpa Mia", tipo: "movie", categoria: "peliculas" }
+    { nombre: "Culpa Mia", tipo: "movie", categoria: "peliculas" },
+    { nombre: "La Jefa", tipo: "tv", categoria: "novelas" },
+    { nombre: "Las Hijas De La Señora Garcia", tipo: "tv", categoria: "novelas" },
+    { nombre: "Los CasaBlanca", tipo: "tv", categoria: "novelas" },
+    { nombre: "Sed De Venganza", tipo: "tv", categoria: "novelas" },
+    { nombre: "Valle Salvaje", tipo: "tv", categoria: "novelas" },
+    { nombre: "A Que Estas Esperando", tipo: "tv", categoria: "series" },
+    { nombre: "Amar, Donde El Amor Teje Sus Redes", tipo: "tv", categoria: "novelas" },
+    { nombre: "Amor Amargo", tipo: "tv", categoria: "novelas" },
+    { nombre: "Caminos Cruzados ", tipo: "tv", categoria: "novelas" },
+    { nombre: "Doctora Lucia", tipo: "tv", categoria: "novelas" },
+    { nombre: "El Angel de Aurora", tipo: "tv", categoria: "novelas" },
+    { nombre: "Valle Salvaje", tipo: "tv", categoria: "novelas" },
 ];
