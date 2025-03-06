@@ -58,7 +58,7 @@ export const CATALOGO_ITEMS = [
     { nombre: "El Amor Invencible", tipo: "tv", categoria: "novelas" },
     { nombre: "El Dragon", tipo: "tv", categoria: "novelas" },
     { nombre: "El Juego de las Llaves", tipo: "tv", categoria: "novelas" },
-    { nombre: "El Pantanal", tipo: "tv", categoria: "novelas" },
+    { nombre: "El Pantanal - Brasil", tipo: "tv", categoria: "novelas" },
     { nombre: "ENCANTADORAS", tipo: "tv", categoria: "novelas" },
     { nombre: "Eternamente Amándonos", tipo: "tv", categoria: "novelas" },
     { nombre: "HASTA QUE TE CONOCI", tipo: "tv", categoria: "novelas" },
