@@ -1,4 +1,4 @@
-const API_KEY = 'TU_CLAVE_DE_API'; // Reemplaza con tu clave de API de
+const API_KEY = '45ca66a85cc9f8f4d18c458bb6536092'; // Reemplaza con tu clave de API de
 const CATALOGO_ITEMS = [
     { nombre: "Kara Sevda", tipo: "tv", id: 66044 }, // Novela turca
     { nombre: "Avenida Brasil", tipo: "tv", id: 45858 }, // Novela brasileña
