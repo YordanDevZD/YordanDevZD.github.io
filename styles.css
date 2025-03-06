@@ -1,4 +1,4 @@
-/* Estilos genees */
+/* Estilos generales */
 * {
     margin: 0;
     padding: 0;
@@ -19,74 +19,79 @@ body {
     padding: 20px;
 }
 
-/* Header */
+/* Header responsive */
 header {
     background: linear-gradient(135deg, #ff416c, #ff4b2b);
-    padding: 60px 0;
-    text-align: center;
-    color: #fff;
-    margin-bottom: 40px;
+    padding: 40px 0;
+    margin-bottom: 30px;
 }
 
 header h1 {
-    font-size: 3rem;
-    font-weight: 600;
-    margin-bottom: 10px;
+    font-size: 2rem;
+    margin-bottom: 8px;
 }
 
 header p {
-    font-size: 1.2rem;
-    opacity: 0.9;
+    font-size: 1rem;
 }
 
-/* Catálogo */
+/* Navegación responsive */
+nav ul {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+nav ul li {
+    margin: 5px 0;
+}
+
+/* Secciones */
+section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+/* Catálogo responsive */
 .catalogo {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.item {
-    background: #2c2c2c;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-}
-
-.item:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
 }
 
 .item img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-bottom: 4px solid #ff416c;
+    height: 250px;
 }
 
 .item h2 {
-    font-size: 1.4rem;
-    margin: 15px;
-    color: #fff;
+    font-size: 1.2rem;
+    margin: 10px;
 }
 
 .item p {
-    font-size: 0.9rem;
-    margin: 0 15px 15px;
-    color: #ccc;
+    font-size: 0.85rem;
+    margin: 0 10px 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
-/* Footer */
-footer {
-    background: #2c2c2c;
-    padding: 20px 0;
-    text-align: center;
-    margin-top: 40px;
-}
-
-footer p {
-    font-size: 0.9rem;
-    color: #ccc;
+@media (min-width: 768px) {
+    header {
+        padding: 60px 0;
+    }
+    
+    header h1 {
+        font-size: 2.5rem;
+    }
+    
+    nav ul {
+        flex-direction: row;
+        gap: 20px;
+    }
+    
+    .catalogo {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
 }
